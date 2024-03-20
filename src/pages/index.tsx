@@ -1,7 +1,8 @@
 import Head from "next/head";
-import { SignIn } from "@clerk/nextjs";
+import { SignInButton, useUser, SignOutButton } from "@clerk/nextjs";
 
 export default function Home() {
+  const user = useUser;
   return (
     <>
       <Head>
@@ -11,7 +12,8 @@ export default function Home() {
       </Head>
 
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+        {!user && <SignInButton />}
+        {!!user && <SignOutButton />}
       </main>
     </>
   );
